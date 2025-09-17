@@ -1,6 +1,6 @@
 from typing import Dict, List, Optional
 
-from app.main import restore_names
+from restore_names import restore_names
 
 
 def test_restore_names_sets_missing_and_none_first_name() -> None:
@@ -30,9 +30,7 @@ def test_restore_names_keeps_existing_first_name() -> None:
     users: List[Dict[str, str]] = [
         {"first_name": "Anna", "last_name": "Holy", "full_name": "Anna Holy"}
     ]
-
     restore_names(users)
-
     assert users[0]["first_name"] == "Anna"
 
 
@@ -44,9 +42,7 @@ def test_restore_names_trims_and_uses_first_token() -> None:
             "full_name": "  Mike   Adams  ",
         }
     ]
-
     restore_names(users)
-
     assert users[0]["first_name"] == "Mike"
 
 
@@ -54,7 +50,5 @@ def test_restore_names_when_key_absent() -> None:
     users: List[Dict[str, str]] = [
         {"last_name": "Doe", "full_name": "John Doe"}
     ]
-
     restore_names(users)
-
     assert users[0]["first_name"] == "John"
